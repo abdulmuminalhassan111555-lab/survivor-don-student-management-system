@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | Survivor Don{% endblock %}
+{% block content %}
+<div class="dashboard-heading">
+  <div>
+    <span class="eyebrow">ADMINISTRATOR</span>
+    <h1>Student Dashboard</h1>
+    <p class="muted">View and search submitted registrations.</p>
+  </div>
+  <a class="button button-light" href="{{ url_for('admin_logout') }}">Log out</a>
+</div>
+
+<section class="stats-card">
+  <div class="stat-number">{{ total_students }}</div>
+  <div>
+    <div class="stat-label">Total registrations</div>
+    <div class="muted small">All students registered so far</div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="toolbar">
+    <form method="get" class="search-form">
+      <input type="search" name="q" placeholder="Search name, course or Student ID" value="{{ search }}">
+      <button type="submit" class="button">Search</button>
+      {% if search %}<a class="button button-light" href="{{ url_for('dashboard') }}">Clear</a>{% endif %}
+    </form>
+    <a class="button export-button" href="{{ url_for('export_csv') }}">Export CSV</a>
+  </div>
+
+  {% if students %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Name</th><th>Age</th><th>Course</th><th>Gender</th><th>Student ID</th><th>Registered</th></tr></thead>
+      <tbody>
+      {% for student in students %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.age }}</td>
+          <td>{{ student.course }}</td>
+          <td>{{ student.gender }}</td>
+          <td>{{ student.student_id }}</td>
+          <td>{{ student.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty-state">
+      <h3>No registrations found</h3>
+      <p class="muted">{% if search %}Try a different search term.{% else %}Student registrations will appear here when submitted.{% endif %}</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

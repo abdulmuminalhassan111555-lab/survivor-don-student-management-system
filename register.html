@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Student Registration | Survivor Don{% endblock %}
+{% block content %}
+<section class="panel form-panel">
+  <span class="eyebrow">STUDENT PORTAL</span>
+  <h1>Student Registration</h1>
+  <p class="muted">Enter your details carefully to register.</p>
+  <form method="post">
+    <label for="name">Full name</label>
+    <input id="name" name="name" maxlength="120" required autocomplete="name" value="{{ request.form.get('name', '') }}">
+
+    <label for="age">Age</label>
+    <input id="age" name="age" type="number" min="1" max="120" required value="{{ request.form.get('age', '') }}">
+
+    <label for="course">Course</label>
+    <input id="course" name="course" maxlength="120" required value="{{ request.form.get('course', '') }}">
+
+    <label for="gender">Gender</label>
+    <select id="gender" name="gender" required>
+      <option value="">Select gender</option>
+      {% for option in ["Male", "Female", "Prefer not to say", "Other"] %}
+        <option value="{{ option }}" {% if request.form.get('gender') == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="student_id">Student ID</label>
+    <input id="student_id" name="student_id" maxlength="80" required value="{{ request.form.get('student_id', '') }}">
+
+    <button type="submit" class="button">Register Student</button>
+  </form>
+  <p class="small muted">Your details will be stored for student registration management.</p>
+  <a class="subtle-link" href="{{ url_for('admin_login') }}">Administrator login</a>
+</section>
+{% endblock %}

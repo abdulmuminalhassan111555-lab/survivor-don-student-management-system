@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Administrator Login | Survivor Don{% endblock %}
+{% block content %}
+<section class="panel form-panel narrow">
+  <span class="eyebrow">PRIVATE AREA</span>
+  <h1>Administrator Login</h1>
+  <p class="muted">Sign in to view student registrations.</p>
+  <form method="post">
+    <label for="username">Username</label>
+    <input id="username" name="username" required autocomplete="username">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required autocomplete="current-password">
+    <button type="submit" class="button">Log in</button>
+  </form>
+  <a class="subtle-link" href="{{ url_for('register') }}">Back to registration page</a>
+</section>
+{% endblock %}

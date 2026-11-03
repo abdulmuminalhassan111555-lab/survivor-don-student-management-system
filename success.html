@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Registration Successful | Survivor Don{% endblock %}
+{% block content %}
+<section class="panel success-panel">
+  <div class="success-icon">✓</div>
+  <span class="eyebrow">REGISTRATION COMPLETE</span>
+  <h1>Thank you, {{ student_name }}!</h1>
+  <p>Your registration has been submitted successfully.</p>
+  <a class="button link-button" href="{{ url_for('register') }}">Register another student</a>
+</section>
+{% endblock %}
